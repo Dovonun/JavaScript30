@@ -96,6 +96,61 @@
   </div>
 
 <script>
+
+  // let isChecked = false;
+  // let isPushed = false;
+  // let check = false;
+
+
+  // function getShift(e){
+  //   if (e.keyCode === 16) isPushed = true;
+  // }
+
+  // function checkAll(){
+  //   console.log("So close and still so far");
+  //   checkboxes.forEach(checkbox => {
+  //     if (check) {
+  //       if (checkbox.checked) {
+  //         check = isPushed = isChecked = false;
+  //       }
+  //       checkbox.checked = true;
+  //     }else{
+  //       if (checkbox.checked) {
+  //         check = true;
+  //       }
+  //     }
+  //     console.log(checkbox.checked + " " + check);
+      
+  //   })
+  // }
+  
+  //Wes
+  let lastChecked = '';
+  
+  const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+  function handleCheck(e) {
+    let inBetween = false;
+    if (e.shiftKey && this.checked && lastChecked !== '') {
+      checkboxes.forEach(checkbox => {
+        console.log(checkbox);
+        if (checkbox === this || checkbox == lastChecked) {
+          inBetween = !inBetween;
+        }
+
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+
+      });
+    }
+    lastChecked = this.checked ? this : '';
+  }
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+
+
+
 </script>
 </body>
 </html>

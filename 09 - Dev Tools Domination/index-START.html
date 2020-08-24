@@ -18,28 +18,47 @@
     }
 
     // Regular
+    console.log("hi");
 
     // Interpolated
+    console.log("Hello %n", "Name");
 
     // Styled
+    console.log('%c I am here', 'background: red;');
 
     // warning!
+    console.warn('Hi');
 
     // Error :|
+    console.error("Error");
 
     // Info
+    //Info Symbol
 
     // Testing
+    console.assert( 1 === 1, "Hi this will not be displayed.");
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    console.dir(document.querySelector('p'));
 
     // Grouping together
+    console.clear();
+
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.groupEnd(`${dog.name}`);
+    })
 
     // counting
+    console.count('Wolf');
 
     // timing
+    console.time('fetch');
+    console.timeEnd('fetch'); 
 
   </script>
 </body>
