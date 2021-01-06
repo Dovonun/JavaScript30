@@ -1,15 +1,18 @@
 const addItems = document.querySelector('.add-items');
 const itemsList = document.querySelector('.plates');
-const items = [];
+const items = JSON.parse(localStorage.getItem('items')) || [];
+const clearBtn = document.querySelector('.btn:first-child');
+const unckeckBtn = document.querySelector('.btn:nth-child(2)');
 
 function populateList(List = [], platesList) {
   platesList.innerHTML = List.map(
     (plate, i) => `
       <li>
-      <input type ="checkbox" data-index=${i} id="item${i}"
+      <input type="checkbox" data-index=${i} id="item${i}"
       ${plate.done ? 'checked' : ''}/>
-      <lable for= 'item${i}'> ${plate.text}</lable></li>`
+      <label for='item${i}'> ${plate.text}</label></li>`,
   ).join('');
+  localStorage.setItem('items', JSON.stringify(items));
 }
 
 function addItem(e) {
@@ -24,4 +27,25 @@ function addItem(e) {
   this.reset();
 }
 
+function toggleDone(e) {
+  if (!e.target.matches('input')) return;
+  const { index } = e.target.dataset;
+  items[index].done = !items[index].done;
+  populateList(items, itemsList);
+}
+
+// Eventlisteners
+clearBtn.addEventListener('click', () => {
+  items.splice(0, items.length);
+  populateList(items, itemsList);
+});
+unckeckBtn.addEventListener('click', () => {
+  items.forEach(item => {
+    item.done = false;
+  });
+  populateList(items, itemsList);
+});
 addItems.addEventListener('submit', addItem);
+itemsList.addEventListener('click', toggleDone);
+
+populateList(items, itemsList);

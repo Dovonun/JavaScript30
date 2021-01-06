@@ -7,6 +7,7 @@
   "plugins": ["prettier"],
   "rules": {
     "linebreak-style": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-console": "off"
   }
 }
